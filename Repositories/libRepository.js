@@ -10,8 +10,13 @@ const connection = mysql.createConnection({
 async function getList() {
     const result = await new Promise((resolve, reject) => {
         connection.query("select name, description, image from dragonflys", (error, results, fields) => {
-            if (error) throw error;
-            resolve(results);
+            try {
+                if (error) throw error;
+                resolve(results);
+            } catch (error) {
+                console.log(error.code);
+            }
+            
         })
     });
 
@@ -22,8 +27,12 @@ async function getList() {
 async function getDragon(name) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select name, description, image from dragonflys where name=?",[name], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results);
+            try {
+                if (error) throw error;
+                resolve(results);
+            } catch (error) {
+                console.log(error.code);
+            }
         })
     });
     return result[0];

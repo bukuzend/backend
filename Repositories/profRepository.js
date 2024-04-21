@@ -14,8 +14,12 @@ async function getProfile(id) {
         "join ach_prof as ap on ap.prof_id = pd.prof_id " +
         "join achievements as ach on ach.ach_id = ap.ach_id" +
         " where pd.prof_id = ?", [id], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results)
+            try {
+                if (error) throw error;
+                resolve(results)
+            } catch (error) {
+                console.log(error.code);
+            }
         });
     });
     return result;
@@ -25,8 +29,12 @@ async function getProfile(id) {
 async function getCatched(Id) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select dragon_id, date from archive_statistics where users_id = ? and veracity = true",[Id], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results);
+            try {
+                if (error) throw error;
+                resolve(results);
+            } catch (error) {
+                console.log(error.code);
+            }
         });
     });
     return result;
@@ -37,8 +45,12 @@ async function getCatched(Id) {
 async function getDragonId(Id) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select name from dragonflys where dragon_id = ?",[Id], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results[0].name);
+            try {
+                if (error) throw error;
+                resolve(results[0].name);
+            } catch (error) {
+                console.log(error.code);
+            }
         });
     });
     return result;
@@ -47,8 +59,12 @@ async function getDragonId(Id) {
 async function getIdDragon(dragon) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select dragon_id from dragonflys where name = ?",[dragon], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results);
+            try {
+                if (error) throw error;
+                resolve(results);
+            } catch (error) {
+                console.log(error.code);
+            }
         });
     });
     console.log(result);

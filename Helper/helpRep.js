@@ -12,8 +12,12 @@ async function getLoginId(id) {
         connection.query("select log.login_id, login from logins as log " +
         "join prof_data as pd on pd.login_id = log.login_id " +
         "where pd.prof_id = ?", [id], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results)
+            try {
+                if (error) throw error;
+                resolve(results);
+            }catch (error) {
+                console.log(error.code);
+            }
         });
     });
 
@@ -23,9 +27,13 @@ async function getLoginId(id) {
 async function getLogin(id) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select * from logins where login_id = ?", [id], (err, results, fields) => {
-            if (err) throw err;
+            try {
+                if (err) throw err;
 
-            resolve(results);
+                resolve(results);
+            } catch (error) {
+                console.log(error.code);
+            }
         })
     });
 
@@ -35,8 +43,12 @@ async function getLogin(id) {
 async function getProfile(id) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select * from prof_data where prof_id = ?", [id], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results)
+            try {
+                if (error) throw error;
+                resolve(results)
+            } catch (error) {
+                console.log(error.code);
+            }
         });
     });
 
@@ -46,9 +58,12 @@ async function getProfile(id) {
 async function getArchProfile(login) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select * from archive_users where login = ?", [login], (err, results, fields) => {
-            if (err) throw err;
-
-            resolve(results[0]);
+            try {
+                if (err) throw err;
+                resolve(results[0]);
+            } catch (error) {
+                console.log(error.code);
+            }
         })
     })
 

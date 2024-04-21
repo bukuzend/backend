@@ -11,8 +11,13 @@ const connection = mysql.createConnection({
 async function getLoginId(id) {
     const result = await new Promise((resolve, reject) => {
         connection.query("select * from prof_data where login_id = ? ", [id], (error, results, fields) => {
-            if (error) throw error;
-            resolve(results)
+            try {
+                if (error) throw error;
+                resolve(results)
+            } catch (error) {
+                console.log(error.code);
+            }
+            
         });
     });
     
@@ -23,9 +28,15 @@ async function getLoginId(id) {
 async function postLogin(login) {
     const result = await new Promise((resolve, reject) => {
         connection.query(`select * from logins where login =?`,[login], (err, result, filds) => {
-            if (err) throw err;
 
-            resolve(result[0]);
+            try {
+                if (err) throw err;
+
+                resolve(result[0]);
+            } catch (error) {
+                console.log(error.code);
+            }
+            
         })
     }); 
 
