@@ -9,7 +9,6 @@ async function postLogin(req, res) {
         console.log(result);
         if(result) {
         res.cookie("aToken", result, {
-            maxAge: 60*60*24*1000,
             httpOnly: true,
             sameSite: "lax",
             secure: true 
