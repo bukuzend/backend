@@ -1,0 +1,60 @@
+Date : 2024-03-11 22:49:35
+Directory : c:\Users\BKZND\Desktop\дыплом\site\true_backend
+Total : 26 files,  3174 codes, 15 comments, 210 blanks, all 3399 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |      2,638 |          0 |          2 |      2,640 |
+| JavaScript |         22 |        528 |         15 |        207 |        750 |
+| Properties |          1 |          7 |          0 |          1 |          8 |
+| XML        |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                            | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                               |         26 |      3,174 |         15 |        210 |      3,399 |
+| . (Files)                                                                       |          4 |      2,680 |          0 |         20 |      2,700 |
+| Controllers                                                                     |          4 |         73 |          3 |         30 |        106 |
+| Helper                                                                          |          5 |        107 |         12 |         30 |        149 |
+| Repositories                                                                    |          4 |        186 |          0 |         58 |        244 |
+| Routers                                                                         |          4 |         28 |          0 |         21 |         49 |
+| Services                                                                        |          4 |         99 |          0 |         51 |        150 |
+| Users                                                                           |          1 |          1 |          0 |          0 |          1 |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                        | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\.env                            | Properties |          7 |          0 |          1 |          8 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Controllers\adminController.js  | JavaScript |         18 |          0 |         10 |         28 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Controllers\authController.js   | JavaScript |         16 |          1 |          5 |         22 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Controllers\libController.js    | JavaScript |         18 |          0 |          7 |         25 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Controllers\profController.js   | JavaScript |         21 |          2 |          8 |         31 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Helper\File.js                  | JavaScript |         15 |         11 |          6 |         32 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Helper\checkAuth.js             | JavaScript |         30 |          1 |          9 |         40 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Helper\distRole.js              | JavaScript |         12 |          0 |          3 |         15 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Helper\getDate.js               | JavaScript |          4 |          0 |          0 |          4 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Helper\helpRep.js               | JavaScript |         46 |          0 |         12 |         58 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Repositories\adminRepository.js | JavaScript |         54 |          0 |         20 |         74 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Repositories\authRepository.js  | JavaScript |         50 |          0 |         16 |         66 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Repositories\libRepository.js   | JavaScript |         26 |          0 |          7 |         33 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Repositories\profRepository.js  | JavaScript |         56 |          0 |         15 |         71 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Routers\adminRouter.js          | JavaScript |          7 |          0 |          6 |         13 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Routers\authRouter.js           | JavaScript |          5 |          0 |          4 |          9 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Routers\libRouter.js            | JavaScript |          7 |          0 |          5 |         12 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Routers\profRouter.js           | JavaScript |          9 |          0 |          6 |         15 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Services\adminService.js        | JavaScript |         19 |          0 |         11 |         30 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Services\authService.js         | JavaScript |         34 |          0 |         19 |         53 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Services\libService.js          | JavaScript |         10 |          0 |          4 |         14 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Services\profService.js         | JavaScript |         36 |          0 |         17 |         53 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\Users\profile.svg               | XML        |          1 |          0 |          0 |          1 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\index.js                        | JavaScript |         35 |          0 |         17 |         52 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\package-lock.json               | JSON       |      2,610 |          0 |          1 |      2,611 |
+| c:\Users\BKZND\Desktop\дыплом\site\true_backend\package.json                    | JSON       |         28 |          0 |          1 |         29 |
+| Total                                                                           |            |      3,174 |         15 |        210 |      3,399 |
++---------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
