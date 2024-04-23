@@ -2,7 +2,6 @@ const authService = require("../Services/authService");
 
 async function postLogin(req, res) {
     const { login, password } = req.body;
-    console.log(req.body);
 
     try {
         const result = await authService.postLogin(login, password);
