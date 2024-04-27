@@ -18,11 +18,10 @@ async function getCatchedProfile(req, res) {
 }
 
 async function postSendStatistic(req, res) {
-
+    console.log(req.body);
     try {
-        const { location, dragon } = req.body;
+    const { location, dragon } = req.body;
     const prof_id = jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id;
-
     console.log(location, dragon, prof_id, req.file.filename);
     const result = await profService.postSendStatistic(location, prof_id,dragon, req.file.filename);
 

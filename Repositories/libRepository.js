@@ -8,13 +8,14 @@ const connection = mysql.createConnection({
 })
 
 async function getList() {
+    console.log("get");
     const result = await new Promise((resolve, reject) => {
-        connection.query("select name, description, image from dragonflys", (error, results, fields) => {
+        connection.query("select * from dragonflys", (error, results, fields) => {
             try {
                 if (error) throw error;
                 resolve(results);
             } catch (error) {
-                console.log(error.code);
+                console.log(error);
             }
             
         })

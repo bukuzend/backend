@@ -2,6 +2,7 @@ const libService = require("../Services/libService");
 const path = require("path");
 
 async function getDragons(req, res) {
+    console.log("se");
     const listDragons = await libService.getList();
     res.json(listDragons);
 }
