@@ -49,5 +49,22 @@ async function postSendStatistic(location,prof_id,dragon,path) {
 }
 
 
+async function getWaitingProfile(profId) {
 
-module.exports = { getProfile, getCatched, postSendStatistic, getDownIcon };
+    const user = await helpRep.getLoginId( profId );
+    const result = await profRepository.getWaitingProfile(user.login_id);
+    return result;
+
+}
+
+
+async function getWaitingPhoto(profId, photo) {
+    const user = await helpRep.getLoginId( profId );
+
+    return path.join(__dirname, "..", "Users", user.login, photo);
+
+
+}
+
+
+module.exports = { getProfile, getCatched, postSendStatistic, getDownIcon, getWaitingProfile, getWaitingPhoto };

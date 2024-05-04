@@ -89,5 +89,21 @@ async function postSendStatistic(location, userId, dragonId, path, getDate) {
     
 }
 
+async function getWaitingProfile(loginId) {
+    const result = await new Promise((resolve, reject) => {
+        connection.query("select st.date, st.geo_loc, st.image, name, description from statistics as st " +
+        "join dragonflys as drg on drg.dragon_id = st.dragon_id " +
+        "where login_id = ?",[loginId], (error, results, fields) => {
+            try {
+                if (error) throw error;
+                resolve(results);
+            } catch (error) {
+                reject(error.code);
+            }
+        })
+    });
+    return result;
+}
 
-module.exports = { getProfile, getCatched, getDragonId, postSendStatistic, getIdDragon };
+
+module.exports = { getProfile, getCatched, getDragonId, postSendStatistic, getIdDragon, getWaitingProfile };

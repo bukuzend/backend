@@ -8,6 +8,8 @@ const  profController = require("../Controllers/profController");
 router.get("/",profController.getInfProfile);
 router.get("/icon", profController.getDownIcon);
 router.get("/catched",profController.getCatchedProfile);
+router.get("/waiting",profController.getWaitingProfile);
+router.get("/waiting/:photo",profController.getWaitingPhoto);
 
 router.get("/unauth", profController.getUnAuth)
 
