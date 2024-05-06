@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
+    connectionLimit : 100,
     host: process.env.host_db,
     user: process.env.user,
     password: process.env.password,
@@ -16,6 +17,7 @@ async function getList() {
                 if (err) throw err;
                 resolve(results);
             }catch (e) {
+                
                 console.log(e.code);
             }
             
