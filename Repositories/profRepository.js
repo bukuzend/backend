@@ -1,11 +1,12 @@
 const mysql = require('mysql');
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
+    connectionLimit : 100,
     host: process.env.host_db,
-    user: process.env.user,
+    user: process.env.user_db,
     password: process.env.password,
     database: process.env.database
-});
+})
 
 async function getProfile(id) {
 
