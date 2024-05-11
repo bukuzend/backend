@@ -16,8 +16,8 @@ const storage = multer.diskStorage({
     filename: async function (req, file, cb) {
         console.log("pre");
         const getLogin = await getLoginId( jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id);
-        console.log(`${getLogin.login}-${getDate.getPath}.jpeg`);
-        cb(null, `${getLogin.login}-${getDate.getPath}.jpeg`);
+        console.log(`${getLogin.login}-${getDate().getPath}.jpeg`);
+        cb(null, `${getLogin.login}-${getDate().getPath}.jpeg`);
     }
 });
 

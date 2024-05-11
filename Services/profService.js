@@ -44,7 +44,7 @@ async function postSendStatistic(location,prof_id,dragon,path) {
     const user = await helpRep.getLoginId( prof_id );
     const dragonId = await profRepository.getIdDragon(dragon);
 
-    const result = await profRepository.postSendStatistic(location, user.login_id, dragonId, path, getDate.date);
+    const result = await profRepository.postSendStatistic(location, user.login_id, dragonId, path, getDate().date);
     return result === true ?  true :  result;
 }
 
