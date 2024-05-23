@@ -28,6 +28,7 @@ async function checkLogin(req, res, next) {
 
     const aToken = req.cookies["aToken"];
 
+
     if(!aToken){
         !req.body.login ? res.status(400).json("unlogined") : next();
         

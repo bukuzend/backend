@@ -60,10 +60,9 @@ async function getWaitingProfile(profId) {
 
 async function getWaitingPhoto(profId, photo) {
     const user = await helpRep.getLoginId( profId );
+    console.log(user);
 
     return path.join(__dirname, "..", "Users", user.login, photo);
-
-
 }
 
 

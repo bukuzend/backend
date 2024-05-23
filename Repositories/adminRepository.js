@@ -12,7 +12,8 @@ const connection = mysql.createPool({
 async function getList() {
     
     const result = await new Promise((resolve, reject) => {
-        connection.query("select * from statistics", (err, results, fileds) => {
+        connection.query("select *, st.image from statistics as st " +
+        "join dragonflys as dr on dr.dragon_id = st.dragon_id ", (err, results, fileds) => {
             try {
                 if (err) throw err;
                 resolve(results);
@@ -46,10 +47,9 @@ async function getRequest(id) {
 }
 
 
-async function getLoginIdAndDragonId(login, dragon) {
+async function getLoginId(login) {
     const result = await new Promise((resolve, reject) => {
-        connection.query("select * from archive_dragons, archive_users " +
-        "where name = ? and login = ?", [dragon, login], (err, results, fileds) => {
+        connection.query("select * from archive_users where login = ?", [login], (err, results, fileds) => {
 
             try {
                 if (err) throw err;
@@ -65,33 +65,39 @@ async function getLoginIdAndDragonId(login, dragon) {
     
 }
 
-async function postRequest(stat_id, login_id, dragon_id, veracity) {
-    return await new Promise((resolve, reject) => {
-        connection.query("insert into archive_statistics(stat_id, geo_loc, date, image, users_id, dragon_id, veracity) " +
-        "select stat_id, geo_loc, date, image, ?, ?, ? " +
-        "from statistics where stat_id = ?", [login_id, dragon_id, veracity, stat_id])
+async function postRequest(stat_id, geo_loc, date, veracity, image, users_id,dragon_id) {
+    await new Promise((resolve, reject) => {
+        connection.query("insert into archive_statistics(stat_id, geo_loc, date, veracity, image, users_id,dragon_id) values(?,?,?,?,?,?,?); ",
+        [stat_id, geo_loc, date, veracity, image, users_id,dragon_id], (err, results, fileds) => {
         try {
             if (err) throw err;
             resolve(true);
         } catch (error) {
             console.log(error.code);
-        }
-        
+        }})
     })
+
+    await connection.query("delete from statistics where stat_id = ?", [stat_id], (err, results, fileds) => {
+        try {
+            if (err) throw err;
+            resolve(true);
+        } catch (error) {
+            console.log(error.code);
+        }})
+    console.log("win");
 }
 
-async function delStat(stat_id) {
-    return await new Promise((resolve, reject) => {
-        connection.query("delete from statistics where stat_id = ?", [stat_id], (err, results, fileds) => {
+
+async function plusLvl(id){
+    await new Promise((resolve, reject) => {
+        connection.query("update prof_data set lvl = lvl + 1 where login_id =?", [id], (err, results, fileds) => {
             try {
                 if (err) throw err;
                 resolve(true);
             } catch (error) {
                 console.log(error.code);
-            }
-            
-        })
+            }})
     })
 }
 
-module.exports = { getList, getRequest, getLoginIdAndDragonId, postRequest, delStat };
+module.exports = { getList, getRequest, getLoginId, postRequest, plusLvl };
