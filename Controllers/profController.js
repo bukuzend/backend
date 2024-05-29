@@ -1,3 +1,5 @@
+const path = require("path");
+const { getCatched } = require("../Repositories/profRepository");
 const profService = require("../Services/profService");
 const jwt = require('jsonwebtoken');
 
@@ -36,6 +38,13 @@ async function postSendStatistic(req, res) {
 }
 
 
+async function getCatchedPhoto(req, res)  {
+    const prof_id = jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id;
+    const pathPhoto = await profService.getWaitingPhoto(prof_id, req.params.photo);
+
+    res.download(pathPhoto,`${req.params.photo}`,(err) => { if(err) console.log(err); });
+}
+
 async function getWaitingProfile(req, res) {
 
     const prof_id = jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id;
@@ -47,7 +56,6 @@ async function getWaitingProfile(req, res) {
 }
 
 async function getWaitingPhoto(req, res) {
-    console.log("object");
     const prof_id = jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id;
     console.log(prof_id, req.params.photo);
     const pathPhoto = await profService.getWaitingPhoto(prof_id, req.params.photo);
@@ -65,4 +73,4 @@ async function getUnAuth(req, res) {
     }
     
 }
-module.exports = { getInfProfile, getCatchedProfile, postSendStatistic, getDownIcon, getUnAuth, getWaitingProfile, getWaitingPhoto};
+module.exports = { getInfProfile, getCatchedProfile, postSendStatistic, getDownIcon, getUnAuth, getWaitingProfile, getWaitingPhoto, getCatchedPhoto};

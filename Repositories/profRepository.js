@@ -29,7 +29,7 @@ async function getProfile(id) {
 
 async function getCatched(Id) {
     const result = await new Promise((resolve, reject) => {
-        connection.query("select dragon_id, date from archive_statistics where users_id = ? and veracity = true",[Id], (error, results, fields) => {
+        connection.query("select dragon_id, date, image from archive_statistics where users_id = ? and veracity = true",[Id], (error, results, fields) => {
             try {
                 if (error) throw error;
                 resolve(results);

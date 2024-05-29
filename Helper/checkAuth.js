@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 async function checkAuth(req, res, next) {
     const aToken = req.cookies["aToken"];
     console.log("auth");
-    // console.log(aToken);
+    console.log(aToken);
 
     if(aToken){
         try {

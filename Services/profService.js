@@ -30,7 +30,8 @@ async function getCatched(prof_id) {
         catched.push(
             {
                 dragon:a,
-                date:item.date
+                date:item.date,
+                image:item.image,
             }
         );
     }
