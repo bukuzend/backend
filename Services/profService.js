@@ -1,9 +1,10 @@
 const profRepository = require("../Repositories/profRepository");
 const getDate = require("../Helper/getDate");
 const helpRep = require("../Helper/helpRep");
+const s3Client = require('../Helper/awsClient')
 
 const path = require('path');
-
+const { PutObjectCommand, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 
 async function getProfile(username) {
@@ -41,12 +42,27 @@ async function getCatched(prof_id) {
 
 
 
-async function postSendStatistic(location,prof_id,dragon,path) {
+async function postSendStatistic(location,prof_id,dragon,path, login, buffer) {
     const user = await helpRep.getLoginId( prof_id );
     const dragonId = await profRepository.getIdDragon(dragon);
 
     const result = await profRepository.postSendStatistic(location, user.login_id, dragonId, path, getDate().date);
-    return result === true ?  true :  result;
+    if(result===true){
+
+        await s3Client.send(
+            new PutObjectCommand({
+                Bucket: process.env.bucket,
+                Key:`${login}/${path}`,
+                Body: buffer
+            })
+        ).then(res => console.log("success send file to storage"))
+        .catch(err => console.log(err));
+
+        return true;
+
+        
+    }else return result
+    
 }
 
 
@@ -61,9 +77,23 @@ async function getWaitingProfile(profId) {
 
 async function getWaitingPhoto(profId, photo) {
     const user = await helpRep.getLoginId( profId );
-    console.log(user);
 
-    return path.join(__dirname, "..", "Users", user.login, photo);
+    return await s3Client.send(
+        new GetObjectCommand({
+            Bucket: process.env.bucket,
+            Key:`${user.login}/${photo}`
+        })
+    )
+    .then( res => res.Body.transformToByteArray())
+    .then(data => {
+        console.log("success get wainting file");
+        const buffer  = Buffer.from(data);
+        return buffer;
+    })
+    .catch(err => {
+        console.log("failed get waiting file");
+        return false;
+     });  
 }
 
 

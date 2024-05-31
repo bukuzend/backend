@@ -1,7 +1,10 @@
 const path = require("path");
-const { getCatched } = require("../Repositories/profRepository");
+// const { getCatched } = require("../Repositories/profRepository");
 const profService = require("../Services/profService");
 const jwt = require('jsonwebtoken');
+
+const { getLoginId } = require("../Helper/helpRep");
+const getDate = require('../Helper/getDate')
 
 async function getInfProfile(req, res) {
     const result = await profService.getProfile(req.body.profileId);
@@ -22,10 +25,15 @@ async function getCatchedProfile(req, res) {
 async function postSendStatistic(req, res) {
     console.log(req.body);
     try {
+
     const { location, dragon } = req.body;
+
     const prof_id = jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id;
-    console.log(location, dragon, prof_id, req.file.filename);
-    const result = await profService.postSendStatistic(location, prof_id,dragon, req.file.filename);
+    const getLogin = await getLoginId( jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id);
+    const filename = `${getLogin.login}-${getDate().getPath}.jpeg`;
+
+    console.log(location, dragon, prof_id, filename);
+    const result = await profService.postSendStatistic(location, prof_id,dragon, filename, getLogin.login, req.file.buffer);
 
     if(!result) throw new Error("Something went wrong");
 
@@ -40,9 +48,10 @@ async function postSendStatistic(req, res) {
 
 async function getCatchedPhoto(req, res)  {
     const prof_id = jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id;
-    const pathPhoto = await profService.getWaitingPhoto(prof_id, req.params.photo);
+    const photo = await profService.getWaitingPhoto(prof_id, req.params.photo);
 
-    res.download(pathPhoto,`${req.params.photo}`,(err) => { if(err) console.log(err); });
+    if(Buffer.isBuffer(photo)) res.status(200).send(photo);
+    else res.status(400).json("photo not found");
 }
 
 async function getWaitingProfile(req, res) {
@@ -52,15 +61,15 @@ async function getWaitingProfile(req, res) {
 
     if(Array.isArray(result)) res.status(200).json(result);
     else res.status(400).json(result);
-
 }
 
 async function getWaitingPhoto(req, res) {
     const prof_id = jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id;
     console.log(prof_id, req.params.photo);
-    const pathPhoto = await profService.getWaitingPhoto(prof_id, req.params.photo);
+    const photo = await profService.getWaitingPhoto(prof_id, req.params.photo);
 
-    res.download(pathPhoto,`${req.params.photo}`,(err) => { if(err) console.log(err); });
+    if(Buffer.isBuffer(photo)) res.status(200).send(photo);
+    else res.status(400).json("photo not found");
 }
 
 

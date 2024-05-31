@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const { getLoginId } = require("./helpRep");
 
 
+
 const storage = multer.diskStorage({
     destination: async function (req, file, cb) {
         const getLogin = await getLoginId( jwt.verify(req.cookies["aToken"], process.env.secret_key).prof_id);
@@ -32,4 +33,5 @@ const storage = multer.diskStorage({
 // });
 
 
-module.exports = multer({storage});
+// module.exports = multer({storage});
+module.exports = multer();

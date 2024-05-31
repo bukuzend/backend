@@ -1,4 +1,3 @@
-const fs = require("fs");
 const path = require('path');
 
 const authRepository = require("../Repositories/authRepository");
@@ -45,9 +44,6 @@ async function postRegister(body) {
 
         
         const pathDir = path.join(__dirname,"..", "Users",login);
-        await fs.mkdir(pathDir, err => {
-            if (err) return error;
-        });
         
         console.log(result);
         return result;
